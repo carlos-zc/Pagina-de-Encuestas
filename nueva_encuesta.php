@@ -2,11 +2,11 @@
 
 <main>
     <div class="seccion contenedor parte-central">
-        <form action="">
+        <form action="#">
             <div class="crea-encuesta">
                 <div class="inicio-encuesta">
-                    <div class="titulo-encueseta">
-                        <label for="tittulo">Título:</label>
+                    <div class="titulo-encuesta">
+                        <label for="titulo">Título:</label>
                         <input type="text" name="titulo" id="titulo" maxlength="50" placeholder="¿De qué tratará esta encuesta?">
                     </div>
                     <div class="nro-preguntas">
@@ -47,7 +47,7 @@
                         
                     </div><!-- .contenedor-preguntas -->
                     
-                    <input type="submit" value="Crear" class="boton boton-terciario">
+                    <input type="submit" id="crear" value="Crear" class="boton boton-terciario">
                 </div>
             </div><!-- .crea-encuesta -->
         </form>
