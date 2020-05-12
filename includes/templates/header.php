@@ -26,8 +26,8 @@
             </div>
         
             <nav class="navegacion">
-                <a href="#">Mis encuestas</a>
-                <a href="#">Ver encuestas</a>
+                <a href="adm_encuestas.php">Mis encuestas</a>
+                <a href="buscar_encuestas.php">Ver encuestas</a>
             </nav>
         </div><!-- .contenido-header -->
     </header>

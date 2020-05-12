@@ -82,6 +82,7 @@
             var nro_respuestas = nodo.querySelector('.cant-respuestas input');
             nro_respuestas.setAttribute('id', 'nro-respuestas' + (indice+1) );
             nro_respuestas.addEventListener('change', cantRespuestas);
+            
         }
 
         if(btnCrear){ //Condiciona que este en el formulario de creacion para evitar errores en otras paginas
@@ -181,7 +182,11 @@
                 inputsPreguntas.forEach(pregunta => {
                     infoEncuesta.append(`${pregunta.id}[pregunta]`, pregunta.value);
 
-                    inputsRespuestas.forEach(respuesta => {
+                    var padrePregunta = pregunta.parentNode.parentNode.parentNode;
+                    padrePregunta.classList.add(pregunta.id);
+                    var respuestas = document.querySelectorAll(`.${pregunta.id} .respuesta-encuesta input`);
+
+                    respuestas.forEach(respuesta => {
                         infoEncuesta.append(`${pregunta.id}[respuestas][${respuesta.id}]`, respuesta.value);
                     });
                 });

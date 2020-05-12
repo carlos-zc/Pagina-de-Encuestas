@@ -25,6 +25,7 @@ img {
 }
 a {
     text-decoration: none;
+    color: #000;
 }
 h1 {
     font-family: 'Open Sans', sans-serif;
@@ -34,12 +35,19 @@ h1 {
 }
 h2 {
     font-size: 3.4rem;
+    line-height: 1.4;
 }
 h3 {
-    font-size: 3rem;
+    font-size: 2.4rem;
+    line-height: 1.4;
 }
 h4{
-    font-size: 2.6rem;
+    font-size: 2rem;
+}
+@media (min-width: 768px) {
+    h2, h3 {
+        line-height: 2;
+    }
 }
 input:focus::placeholder {
     color: transparent;
@@ -54,6 +62,9 @@ input:focus::placeholder {
     width: 95%;
     max-width: 120rem;
     margin: 0 auto;
+}
+.centrado {
+    text-align: center;
 }
 .parte-central {
     border: 2px solid #e1e1e1;
@@ -487,6 +498,28 @@ footer p.copyright {
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1);
+}
+
+/* MIS ENCUESTAS */
+.contenedor-encuesta {
+    display: block;
+    border: 2px solid #505963;
+    padding-left: 2rem;
+    background-color: #e2e2e2;
+    margin-bottom: 1rem;
+    transition: all .3s;
+}
+.contenedor-encuesta:hover {
+    background-color: var(--primario);
+    color: #fff;
+}
+.contenedor-encuesta h3 {
+    margin: 0;
+    font-weight: normal;
+}
+.contenedor-encuesta p {
+    margin: 0 0 1rem 1rem;
+    color: #5f5f5f;
 }
 
 /* Notificaciones */

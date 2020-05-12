@@ -4,7 +4,7 @@ if($_POST['accion'] == 'crear') {
     // creara un nuevo registro en la base de datos
     require_once('../funciones/bd_conexion.php');
 
-    $titulo = filter_var($_POST['titulo'], FILTER_SANITIZE_STRING); // estos filtros impiden que agregen contenido html
+    $titulo = $_POST['titulo'];
 
     try {
         // Insercion de datos mediante prepared statements
@@ -15,7 +15,7 @@ if($_POST['accion'] == 'crear') {
 
         $i = 1;
         while($_POST['pregunta'.$i]) {
-            $pregunta = filter_var($_POST['pregunta'.$i]['pregunta'], FILTER_SANITIZE_STRING);
+            $pregunta = $_POST['pregunta'.$i]['pregunta'];
 
             $stmt = $conn->prepare("INSERT INTO pregunta (pregunta, id_enc_pregunta) VALUES (?,?)");
             $stmt->bind_param("si", $pregunta, $idEncuesta);
@@ -31,8 +31,9 @@ if($_POST['accion'] == 'crear') {
         }
 
         $ip = $_SERVER['REMOTE_ADDR'];
-        $stmt = $conn->prepare("INSERT INTO usuario (ip_usuario, id_enc_usuario) VALUES (?,?)");
-        $stmt->bind_param("si", $ip, $idEncuesta);
+        $accion = 'creador';
+        $stmt = $conn->prepare("INSERT INTO usuario (ip_usuario, id_enc_usuario, accion) VALUES (?,?,?)");
+        $stmt->bind_param("sis", $ip, $idEncuesta, $accion);
         $stmt->execute();
 
         $respuesta = [
