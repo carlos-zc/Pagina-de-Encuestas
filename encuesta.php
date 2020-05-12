@@ -1,6 +1,7 @@
 <?php 
     include_once "includes/templates/header.php"; 
-    include_once "includes/funciones/bd_conexion.php"; 
+    include_once "includes/funciones/bd_conexion.php";
+    include_once "includes/funciones/funciones.php";
     $id = $_GET['id']; 
     
     
@@ -33,7 +34,9 @@
                         $p++;
                     }
                 ?>
-                <input type="submit" value="Terminar" class="boton boton-terciario">
+                <?php if(!dueñoEncuesta($id)): ?>
+                    <input type="submit" value="Terminar" class="boton boton-terciario">
+                <?php endif; ?>
             </form>
         </div><!-- .encuesta -->
     </div>

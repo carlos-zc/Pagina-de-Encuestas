@@ -51,3 +51,21 @@ function obtenerTotalPreguntas($id) {
         return false;
     }
 }
+
+function dueñoEncuesta($id) {
+    include "bd_conexion.php";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    try {
+        $sql = "SELECT accion FROM usuario";
+        $sql .= " WHERE id_enc_usuario = $id AND ip_usuario = '$ip' ";
+        $respuesta = $conn->query($sql)->fetch_assoc();
+        if($respuesta['accion'] == 'creador'){
+            return true;
+        } else {
+            return false;
+        };
+
+    } catch(Exception $e) {
+        echo "Error!!". $e->getMessage() . "<br>";
+    }
+}
