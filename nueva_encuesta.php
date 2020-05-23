@@ -35,11 +35,11 @@
                             <div class="contenedor-respuestas">
                                 <div class="respuesta-encuesta">
                                     <label for="respuesta1">Respuesta #1</label>
-                                    <input type="text" name="respuesta1" id="respuesta1" maxlength="100" placeholder="Respuesta...">
+                                    <input type="text" name="respuesta[]" id="respuesta1" maxlength="100" placeholder="Respuesta...">
                                 </div>
                                 <div class="respuesta-encuesta">
                                     <label for="respuesta2">Respuesta #2</label>
-                                    <input type="text" name="respuesta2" id="respuesta2" maxlength="100" placeholder="Respuesta...">
+                                    <input type="text" name="respuesta[]" id="respuesta2" maxlength="100" placeholder="Respuesta...">
                                 </div>
                             </div><!-- .contenedor-respuestas -->
                             

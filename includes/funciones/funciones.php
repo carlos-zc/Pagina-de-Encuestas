@@ -52,7 +52,7 @@ function obtenerTotalPreguntas($id) {
     }
 }
 
-function dueñoEncuesta($id) {
+function propietarioEncuesta($id) {
     include "bd_conexion.php";
     $ip = $_SERVER['REMOTE_ADDR'];
     try {
@@ -63,7 +63,25 @@ function dueñoEncuesta($id) {
             return true;
         } else {
             return false;
-        };
+        }
+
+    } catch(Exception $e) {
+        echo "Error!!". $e->getMessage() . "<br>";
+    }
+}
+
+function realizado($id) {
+    include "bd_conexion.php";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    try {
+        $sql = "SELECT accion FROM usuario";
+        $sql .= " WHERE id_enc_usuario = $id AND ip_usuario = '$ip' ";
+        $respuesta = $conn->query($sql)->fetch_assoc();
+        if($respuesta['accion'] == 'encuestado'){
+            return true;
+        } else {
+            return false;
+        }
 
     } catch(Exception $e) {
         echo "Error!!". $e->getMessage() . "<br>";

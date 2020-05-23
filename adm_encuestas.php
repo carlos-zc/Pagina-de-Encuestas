@@ -19,8 +19,9 @@
                             <h3><?= $encuesta['titulo'] ?></h3>
                             <p>Veces realizada: <span><?= $realizado['total'] ?></span></p>
                         </a>
-                    <?php }
-                } else {
+                    <?php } ?>
+                    <a href="nueva_encuesta.php" class="boton boton-secundario">Crear Nueva</a>
+                <?php } else {
                     // no hay resultados
                     echo "<p>Aun no has creado ninguna encuesta, puedes crear una ahora <a href='nueva_encuesta.php' style='color: dodgerblue'>pulsando aqui</a></p>";
                 }

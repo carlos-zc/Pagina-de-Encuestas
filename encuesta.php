@@ -34,9 +34,16 @@
                         $p++;
                     }
                 ?>
-                <?php if(!dueñoEncuesta($id)): ?>
-                    <input type="submit" value="Terminar" class="boton boton-terciario">
+                <?php if(!propietarioEncuesta($id) && !realizado($id)):
+                    // Muestra el submit si no eres el creador y si no la haz respondido anteriormente?>
+                    <input type="hidden" name="id_encuesta" id="id_encuesta" value="<?= $id ?>">
+                    <input type="submit" id="responder" value="Terminar" class="boton boton-terciario">
                 <?php endif; ?>
+                <?php if(realizado($id)) { ?>
+                    <p class="realizado">Ya ha respondido esta encuesta, puedes elegir otra 
+                        <a href="buscar_encuestas.php" style='color: dodgerblue'>pulsando aqui</a>
+                    </p>
+                <?php } ?>
             </form>
         </div><!-- .encuesta -->
     </div>

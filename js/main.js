@@ -6,7 +6,8 @@
         const btnMenu = document.querySelector(".menu-movil"),
               menu = document.querySelector(".navegacion"),
               btnComenzar = document.querySelector("#comenzar"),
-              btnCrear = document.querySelector('#crear');
+              btnCrear = document.querySelector('#crear'),
+              btnResponder = document.querySelector('#responder');
 
         eventListeners();
 
@@ -20,7 +21,10 @@
                 // Cuando se ejecuta el fomulario
                 btnCrear.addEventListener('click', leerFormulario);
             }
-            
+
+            if(btnResponder) {
+                btnResponder.addEventListener('click', validarRespuesta)
+            }
             
         }
         
@@ -174,7 +178,7 @@
             });
 
             if(valido) {
-                // Pasa la validacion, crear llamado a Ajax
+                // Crea el objeto con la infomacion para ajax
                 const infoEncuesta = new FormData();
                 infoEncuesta.append('titulo', inputTitulo.value);
                 infoEncuesta.append('accion', 'crear');
@@ -197,7 +201,42 @@
             
         }
 
+        function validarRespuesta(e) {
+            e.preventDefault();
+            const formularios = document.querySelectorAll(".form-encuesta"),
+                  idEncuesta = document.querySelector("#id_encuesta").value;
+            var respSeleccionadas = [];
+
+            formularios.forEach(pregunta => {
+                var respuesta = pregunta.querySelectorAll('.respuesta input');
+                respuesta.forEach(resp => {
+                    if (resp.checked) {
+                        respSeleccionadas.push(resp.id.substring(1) );
+                    }
+                });
+                
+            });
+
+            if(formularios.length == respSeleccionadas.length) {
+                // Crea el objeto con la infomacion para ajax
+                const respuestaUsuario = new FormData();
+                respuestaUsuario.append('accion', 'responder');
+                respuestaUsuario.append('id_encuesta', idEncuesta);
+                respuestaUsuario.append('respuestas', respSeleccionadas);
+                // guardar la respuesta
+                insertarBD(respuestaUsuario);
+            } else {
+                // No respondio todas las preguntas
+                // Mostrar la notificacion
+                mostrarNotificacion('Debes responder todas las preguntas', 'error');
+            }
+            
+
+        }
+
         function insertarBD(datos) {
+            // desabilita el boton de envio
+            document.querySelector('input[type="submit"]').setAttribute('disabled', true);
             // llamado a Ajax
             // crear el objeto
             const xhr = new XMLHttpRequest();
@@ -210,14 +249,29 @@
                 if(this.status === 200 ){
                     // leemos la respuesta PHP
                     const respuesta = JSON.parse(xhr.responseText);
-        
-                    // Mostrar la notificacion
-                    mostrarNotificacion('Encuesta creada con éxito', 'correcto');
+                    
+                    if (respuesta.respuesta === 'correcto') {
+                        if (respuesta.accion === 'crear') {
+                            // Mostrar la notificacion
+                            mostrarNotificacion('Encuesta creada con éxito', 'correcto');
+                            // despues de 3s redireccionar
+                            setTimeout(() => {
+                                window.location.href = `encuesta.php?id=${respuesta.id}`;
+                            }, 3000);
+                        }
 
-                    // despues de 3s redireccionar
-                    setTimeout(() => {
-                        window.location.href = `encuesta.php?id=${respuesta.id}`;
-                    }, 3000);
+                        if (respuesta.accion === 'responder') {
+                            // Mostrar la notificacion
+                            mostrarNotificacion('¡Respuesta enviada!', 'correcto');
+                            // despues de 3s regarga la pagina
+                            setTimeout(() => {
+                                location.reload();
+                            }, 3000);
+                        }
+                    } else {
+                        // Error
+                        mostrarNotificacion('Hubo un error...', 'error');
+                    }
         
                 }
             }

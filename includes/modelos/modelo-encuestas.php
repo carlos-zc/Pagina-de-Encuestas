@@ -38,7 +38,8 @@ if($_POST['accion'] == 'crear') {
 
         $respuesta = [
             'respuesta' => 'correcto',
-            'id' => $idEncuesta
+            'id' => $idEncuesta,
+            'accion' => 'crear'
         ];
         $stmt->close();
         $conn->close();
@@ -49,12 +50,48 @@ if($_POST['accion'] == 'crear') {
         ];
     }
 
-    echo json_encode($respuesta);
+    die(json_encode($respuesta));
 
-
-} else {
-    echo json_encode($_POST);
 }
 
+if($_POST['accion'] == 'responder') {
+    // guardara la respuesta en la base de datos
+    require_once('../funciones/bd_conexion.php');
+
+    $id_encuesta = $_POST['id_encuesta'];
+    $id_respuestas = explode(",", $_POST['respuestas']);
+
+    try {
+        foreach ($id_respuestas as $id) {
+            // Insercion de datos mediante prepared statements
+            $stmt = $conn->prepare("UPDATE respuesta SET conteo = conteo + 1 WHERE id_respuesta = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+        }
+        
+
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $accion = 'encuestado';
+        $stmt = $conn->prepare("INSERT INTO usuario (ip_usuario, id_enc_usuario, accion) VALUES (?,?,?)");
+        $stmt->bind_param("sis", $ip, $id_encuesta, $accion);
+        $stmt->execute();
+
+        $respuesta = [
+            'respuesta' => 'correcto',
+            'id' => $id_encuesta,
+            'accion' => 'responder'
+        ];
+        $stmt->close();
+        $conn->close();
+        
+    } catch(Exception $e){
+        $respuesta = [
+            'error' => $e->getMessage()
+        ];
+    }
+
+    die(json_encode($respuesta));
+
+}
 
 ?>
