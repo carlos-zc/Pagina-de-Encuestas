@@ -54,7 +54,7 @@ function obtenerTotalPreguntas($id) {
 
 function propietarioEncuesta($id) {
     include "bd_conexion.php";
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = getIpUsuario();
     try {
         $sql = "SELECT accion FROM usuario";
         $sql .= " WHERE id_enc_usuario = $id AND ip_usuario = '$ip' ";
@@ -72,7 +72,7 @@ function propietarioEncuesta($id) {
 
 function realizado($id) {
     include "bd_conexion.php";
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = getIpUsuario();
     try {
         $sql = "SELECT accion FROM usuario";
         $sql .= " WHERE id_enc_usuario = $id AND ip_usuario = '$ip' ";
