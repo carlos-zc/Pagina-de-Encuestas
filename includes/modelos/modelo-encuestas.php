@@ -1,4 +1,5 @@
 <?php 
+require_once('../funciones/funciones.php');
 
 if($_POST['accion'] == 'crear') {
     // creara un nuevo registro en la base de datos
@@ -30,7 +31,7 @@ if($_POST['accion'] == 'crear') {
             $i++;
         }
 
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = getIpUsuario();
         $accion = 'creador';
         $stmt = $conn->prepare("INSERT INTO usuario (ip_usuario, id_enc_usuario, accion) VALUES (?,?,?)");
         $stmt->bind_param("sis", $ip, $idEncuesta, $accion);
@@ -70,7 +71,7 @@ if($_POST['accion'] == 'responder') {
         }
         
 
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = getIpUsuario();
         $accion = 'encuestado';
         $stmt = $conn->prepare("INSERT INTO usuario (ip_usuario, id_enc_usuario, accion) VALUES (?,?,?)");
         $stmt->bind_param("sis", $ip, $id_encuesta, $accion);
