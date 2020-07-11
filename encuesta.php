@@ -43,6 +43,7 @@
                     <p class="realizado">Ya ha respondido esta encuesta, puedes elegir otra 
                         <a href="buscar_encuestas.php" style='color: dodgerblue'>pulsando aqui</a>
                     </p>
+                    <a class="boton boton-secundario" href="info_encuesta.php?id=<?= $id ?>">Ver Estadísticas</a>
                 <?php } ?>
                 <?php if(propietarioEncuesta($id) ) { ?>
                     <a class="boton boton-secundario" href="info_encuesta.php?id=<?= $id ?>">Ver Estadísticas</a>

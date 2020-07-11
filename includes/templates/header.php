@@ -15,7 +15,7 @@
         <div class="contenido-header contenedor">
             <div class="separacion-menu">
                 <img class="ujaplogo" src="galeria/Logo-UJAP2.png" alt="Logo Ujap">
-                <a href="#">
+                <a href="/">
                     <h1 class="titulo">Tu<span>Encuesta</span></h1>
                 </a>
                 
