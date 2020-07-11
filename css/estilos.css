@@ -184,6 +184,29 @@ nav.navegacion a:hover {
     }
 }
 
+/* Logo Ujap */
+.ujaplogo{
+    width: 80px;
+    height: 80px;
+    padding-right: 10px;
+    animation-name: logobounce;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+}
+
+/* Animacion Logo */
+@keyframes  logoin{
+    0%   {left:-100; top:-100px;}
+    100% {left:0px; top:0px;}
+}
+
+@keyframes  logobounce{
+    0%   {transform: translateX(-100%);}
+    33%   {transform: translateX(0%);}
+    66%   {transform: translateX(-50%);}
+    100% {transform: translateX(0%);}
+}
+
 /** Menu Movil **/
 div.menu-movil {
     width: 50px;
