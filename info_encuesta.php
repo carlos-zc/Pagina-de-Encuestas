@@ -22,7 +22,7 @@
                 $sql_respuesta = mysqli_query($conn, "SELECT `respuesta`, `conteo`, `id_respuesta` FROM `respuesta` WHERE `id_preg_respuesta`=$row_pregunta[id_pregunta]");
                 while($row_respuesta = mysqli_fetch_assoc($sql_respuesta)){
                     $vector_respuesta [$r] = $row_respuesta['conteo'];
-                    echo "<p>&nbsp;&nbsp;&nbsp;&nbsp;- $row_respuesta[respuesta]: $row_respuesta[conteo] Votos.</p>";
+                    echo "<p>&nbsp;&nbsp;&nbsp;&nbsp;- $row_respuesta[respuesta]: <strong>$row_respuesta[conteo] Votos.</strong></p>";
                     $r++;
                 }    
                 $vector_grafica [$p] = $vector_respuesta;                         
@@ -89,18 +89,24 @@
                     // Valores
                     $valorx=-25;
                     $valory=3;
-                    for ($i=0; $i < 10 ; $i++) { 
-                        if($i == 0){
-                            echo "<text x='$valorx' y='$valory' fill='black'>$maximo</text>";
-                        }else{                            
-                            $valory = $valory + 30;
-                            $valor = $maximo - (($maximo / 10) * $i); 
-                            echo "<text x='$valorx' y='$valory' fill='black'>$valor</text>";
-                        }                        
+                    if($maximo == 0){
+                        echo "<text x='$valorx' y='$valory' fill='black'>1</text>";
+                    }else{
+                        for ($i=0; $i < 10 ; $i++) { 
+                            if($i == 0){
+                                echo "<text x='$valorx' y='$valory' fill='black'>$maximo</text>";
+                            }else{                            
+                                $valory = $valory + 30;
+                                $valor = $maximo - (($maximo / 10) * $i); 
+                                if(strval($valor) == strval(intval($valor))){
+                                    echo "<text x='$valorx' y='$valory' fill='black'>$valor</text>";
+                                }
+                                
+                            }                        
+                        }
                     }
-                    echo "<text x='$valorx' y='303' fill='black'>0</text>";
-                ?>
-                <?php
+                        
+                    echo "<text x='$valorx' y='303' fill='black'>0</text>";               
 
                     for ($i=0; $i < count($vector_grafica); $i++) { 
 
@@ -124,16 +130,22 @@
                                 } 
                             }
                             
-                            if($barras == $maximo){
-                                $altura = 300;
-                                $posiciony = 0;
-                            }elseif($barras == 0){
+                            if($maximo != 0){
+                                if($barras == $maximo){
+                                    $altura = 300;
+                                    $posiciony = 0;
+                                }elseif($barras == 0){
+                                    $altura = 0;                            
+                                    $posiciony = 300;
+                                }else{
+                                    $altura = ($barras * 300) / $maximo;                              
+                                    $posiciony = 300 - $altura;
+                                }  
+                            }else{
                                 $altura = 0;                            
                                 $posiciony = 300;
-                            }else{
-                                $altura = ($barras * 300) / $maximo;                              
-                                $posiciony = 300 - $altura;
-                            }                               
+                            }
+                                                             
                             echo "<rect id='$barras' width='$grosor' height='$altura' x='$posicion' y='$posiciony' style='fill:$colores[$b];stroke-width:1;stroke:rgb(0,0,0)'/>";
                             
                             $posicionop = (($grosor - 10) / 2) + $posicion;
