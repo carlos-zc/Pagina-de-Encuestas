@@ -46,7 +46,25 @@
                 <line x1="0" y1="240" x2="500" y2="240" style="stroke:gray;stroke-width:0.5;"/>
                 <line x1="0" y1="270" x2="500" y2="270" style="stroke:gray;stroke-width:0.5;"/>       
                 
-                <?php   
+                <?php  
+                
+                    $letras = [
+                        '1' => 'A',
+                        '2' => 'B',
+                        '3' => 'C',
+                        '4' => 'D',
+                        '5' => 'E',
+                        '6' => 'F'
+                    ];
+
+                    $colores = [
+                        '1' => 'rgb(23, 190, 187)',
+                        '2' => 'rgb(46, 40, 42)',
+                        '3' => 'rgb(126, 62, 47)',
+                        '4' => 'rgb(205, 83, 52)',
+                        '5' => 'rgb(237, 184, 139)',
+                        '6' => 'rgb(250, 216, 214)'
+                    ];
                     
                     $maximo = 0;
                  
@@ -116,10 +134,12 @@
                                 $altura = ($barras * 300) / $maximo;                              
                                 $posiciony = 300 - $altura;
                             }                               
-                            echo "<rect id='$barras' width='$grosor' height='$altura' x='$posicion' y='$posiciony' style='fill:rgb(0,0,255);stroke-width:0;stroke:rgb(0,0,0)'/>";
+                            echo "<rect id='$barras' width='$grosor' height='$altura' x='$posicion' y='$posiciony' style='fill:$colores[$b];stroke-width:1;stroke:rgb(0,0,0)'/>";
                             
-                            $posicionop = (($grosor - 30) / 2) + $posicion;
-                            echo "<text x='$posicionop' y='315' fill='black'>Op $b</text>";                            
+                            $posicionop = (($grosor - 10) / 2) + $posicion;
+                            
+                            echo "<text x='$posicionop' y='315' fill='black'>$letras[$b]</text>";                            
+                            // echo "<rect width='10' height='10' x='$posicionop' y='320' style='fill:rgb(179, 255, 0);stroke-width:0;stroke:rgb(0,0,0)' />";
                             $b++;
                         }                                            
                     }
