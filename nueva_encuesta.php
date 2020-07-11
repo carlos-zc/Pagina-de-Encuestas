@@ -11,7 +11,7 @@
                     </div>
                     <div class="nro-preguntas">
                         <label for="cantidad-preguntas">Número de preguntas a realizar:</label>
-                        <input type="number" name="cantidad-preguntas" id="cantidad-preguntas" min="1" max="30" placeholder="1" value="1">
+                        <input type="number" name="cantidad-preguntas" id="cantidad-preguntas" min="1" max="6" placeholder="1" value="1">
                     </div>
                     
                     <button id="comenzar" class="boton boton-secundario">Comenzar</button>
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="cant-respuestas">
                                     <label for="nro-respuestas">Cantidad de respuestas posibles</label>
-                                    <input type="number" name="nro-respuestas" id="nro-respuestas" min="2" max="10" placeholder="2" value="2">
+                                    <input type="number" name="nro-respuestas" id="nro-respuestas" min="2" max="6" placeholder="2" value="2">
                                 </div>
                             </div>
                     

@@ -265,7 +265,8 @@
                             mostrarNotificacion('¡Respuesta enviada!', 'correcto');
                             // despues de 3s regarga la pagina
                             setTimeout(() => {
-                                location.reload();
+                                // location.reload();
+                                window.location.href = `info_encuesta.php?id=${respuesta.id}`;
                             }, 3000);
                         }
                     } else {
